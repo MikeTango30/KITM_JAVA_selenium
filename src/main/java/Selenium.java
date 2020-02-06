@@ -7,35 +7,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Selenium {
+    static WebDriver browser;
 
     private static final int SECONDS = 2;
 
-    public static void main(String[] args) {
-        System.out.println("Selenium TEST");
-
+    public static void setup(){
         System.setProperty("webdriver.chrome.driver", "webDrivers/chromedriver.exe");
-        WebDriver browser = new ChromeDriver();
+        browser = new ChromeDriver();
 
         browser.get("https://wwww.bing.com");
+    }
 
-        WebElement searchField = browser.findElement(By.id("sb_form_q"));
-        searchField.sendKeys("Baranauskas");
-        searchField.sendKeys(Keys.ENTER);
-
-        String searchResultCount = browser.findElement(By.className("sb_count")).getText();
-        String searchCount = searchResultCount.replaceAll("[ ,A-Za-z]+", "");
-
-        int count = Integer.parseInt(searchCount);
-
-        String message = "Rašytojas nelabai  populiarus internetinėse platybėse";
-        if (count >= 50000) {
-            message = searchResultCount + "\n" + "Džiaugiamės, jog  jaunimas dar neužmiršo Anykščių šilelio.";
-        }
-
-        System.out.println(message);
+    public static void close() {
 
         browser.close();
+    }
 
+    public static void searchByKeyword(String keyword) {
+        WebElement searchField = browser.findElement(By.id("sb_form_q"));
+        searchField.sendKeys(keyword);
+        searchField.sendKeys(Keys.ENTER);
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("Selenium Maven JUnit");
     }
 
     private static void waitForElementById(WebDriver browser, String id) {
