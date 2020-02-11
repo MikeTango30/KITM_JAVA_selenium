@@ -1,9 +1,9 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class SeleniumTest {
-    @Before
+    @BeforeTest
     public void setup() {
         Selenium.setup();
     }
@@ -13,7 +13,7 @@ public class SeleniumTest {
         Selenium.searchByKeyword("Baranauskas");
     }
 
-    @After
+    @AfterTest
     public void close() {
         Selenium.close();
     }
